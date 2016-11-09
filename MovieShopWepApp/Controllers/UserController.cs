@@ -41,7 +41,12 @@ namespace MovieShopWepApp.Controllers
 
         public PartialViewResult GetMoviesResult(int? id)
         {
-            return PartialView("PartialMovieView", _genreServiceGateway.Read(id.Value).Movies);
+            var movies = _genreServiceGateway.Read(id.Value).Movies;
+            foreach (var movie in movies)
+            {
+                movie.Genre = _genreServiceGateway.Read(movie.GenreId);
+            }
+            return PartialView("PartialMovieView", movies);
         }
 
         public ActionResult MovieDetails(int id)
