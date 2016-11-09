@@ -1,0 +1,57 @@
+﻿@using ServiceGateway.Entities
+@model List<Movie>
+    
+<div style="margin-left: 17%" class="header">Movie Selection</div>
+<div id="movies" class="row list-group pre-scrollable" style="margin-left: 17%; min-height: 60%; max-height: 90%">
+    
+    @foreach (var movie in Model)
+    {
+        <div style="margin-bottom: 2%;" class="item  col-xs-3 col-lg-3">
+            <div id="moviespace" class="thumbnail">
+
+                <img class="group list-group-image" src="@movie.ImageUrl" alt=""/>
+                <div class="caption">
+                    <h4 style="font-weight: bolder" class="group inner list-group-item-heading; info">
+                        @movie.Title
+                    </h4>
+                    <p class="group inner list-group-item-text; info">
+                        Genre: @movie.Genre.Name
+                    </p>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <p class="lead; info">
+                                Price: @movie.Price
+                            </p>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <a href="#openModal" onclick="ShowDetails(@movie.Id)"><img width="130" height="60" src="http://blog.performance-bmw.com/wp-content/uploads/2015/10/Details-button.png"/></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+
+<div id="openModal" class="modalDialog">
+    <div>
+        @{ Html.RenderPartial("PartialMovieDetailsView", new Movie() { Genre = new Genre() { Movies = new List<Movie>() } });}
+    </div>
+</div>
+
+<script type="text/javascript">
+    var ShowDetails = function (movieId) {
+        $.ajax({
+            dataType: "html",
+            url: '@Url.Action("GetMovieDetails")',
+            data: { id: movieId },
+            success: function (data) {
+                $('#openModal').html(data);
+            },
+            error: function () {
+                $('#openModal').html("<h3>Couldn't do that</h3>");
+            }
+        }
+    )};
+</script>

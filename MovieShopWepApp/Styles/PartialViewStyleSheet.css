@@ -1,0 +1,19 @@
+﻿body {
+    overflow-y:hidden
+}
+
+.list-group-item-heading {
+    font-family: fantasy;
+    font-style: oblique;
+    position: relative;
+}
+.list-group-item-text {
+    font-family: fantasy;
+    font-style: oblique;
+    position: relative;
+}
+.lead {
+    font-family: fantasy;
+    font-style: oblique;
+    position: relative;
+}

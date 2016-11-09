@@ -1,0 +1,96 @@
+﻿
+@model ServiceGateway.Entities.Movie
+
+@{
+    ViewBag.Title = "PartialMovieDetailsView";
+}
+
+<head>
+    <link rel="stylesheet" type="text/css" href="~/Styles/MovieDetailsStylesheet.css">
+</head>
+<body>
+    <div style="width: 50%; height: 70%">
+
+        <p id="title" style="height: 10%">Movie Details</p><a href="#close" title="Close" class="close">X</a>
+        <div style="height: 50%; margin-top: 2%" class="row">
+            <div style="height: 100%" class="col-xs-4">
+                <div style="height: 25%" class="row">
+                    <div class="col-xs-6">
+                        <p class="type">Title:</p>
+                    </div>
+                    <div class="col-xs-6">
+                        <p class="value">@Model.Title</p>
+                    </div>
+                </div>
+                <div style="height: 25%" class="row">
+                    <div class="col-xs-6">
+                        <p class="type">Genre:</p>
+                    </div>
+                    <div class="col-xs-6">
+                        <p class="value">@Model.Genre.Name</p>
+                    </div>
+                </div>
+                <div style="height: 25%" class="row">
+                    <div class="col-xs-6">
+                        <p class="type">Released:</p>
+                    </div>
+                    <div class="col-xs-6">
+                        <p class="value">@Model.Year</p>
+                    </div>
+                </div>
+                <div style="height: 25%" class="row">
+                    <div class="col-xs-6">
+                        <p class="type">Price:</p>
+                    </div>
+                    <div class="col-xs-6">
+                        <p class="value">@Model.Price</p>
+                    </div>
+                </div>
+            </div>
+            <div style="height: 100%" align="right" class="col-xs-8">
+                <iframe src="@Model.MovieUrl"></iframe>
+            </div>
+        </div>
+        <div style="height: 27%; margin-top: 1%" class="row">
+            <div class="col-xs-4">
+                <p class="type">Summary:</p>
+            </div>
+            <div align="left" class="col-xs-8">
+                <p class="value">@Model.Description</p>
+            </div>
+        </div>
+
+        @*<div class="row list-group pre-scrollable">
+                <table>
+                    <thead></thead>
+                    <tr>
+                        <td class="type">Title:</td>
+                        <td class="value">@Model.Title</></td>
+                        <td rowspan="4">
+                            <iframe width="500" , height="250" marginwidth="2" marginheight="2" src="@Model.MovieUrl" frameborder="0" allowfullscreen></iframe>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="type">Genre:</td>
+                        <td class="value">@Model.Genre.Name</td>
+                    </tr>
+                    <tr>
+                        <td class="type">Released:</td>
+                        <td class="value">@Model.Year</td>
+                    </tr>
+                    <tr>
+                        <td class="type">Price:</td>
+                        <td class="value">@Model.Price</td>
+                    </tr>
+                    <tr>
+                        <td class="type">Summary:</td>
+                        <td colspan="2">@Model.Description</td>
+                    </tr>
+                </table>
+            </div>*@
+
+        <div style="height: 9%; margin-bottom: 1%" align="right">
+            <a class="btn btn-success" href='@Url.Action("Checkout", "User", new {id = @Model.Id})'>Checkout</a>
+        </div>
+    </div>
+</body>
