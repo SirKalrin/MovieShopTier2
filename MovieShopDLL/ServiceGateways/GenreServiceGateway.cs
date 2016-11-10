@@ -44,7 +44,7 @@ namespace ServiceGateway.ServiceGateways
 
         public override Genre Update(Genre t)
         {
-            HttpResponseMessage response = Client.PutAsJsonAsync("api/genres", t).Result;
+            HttpResponseMessage response = Client.PutAsJsonAsync($"api/genres/{t.Id}", t).Result;
             if (response.IsSuccessStatusCode)
             {
                 return response.Content.ReadAsAsync<Genre>().Result;

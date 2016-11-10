@@ -47,7 +47,7 @@ namespace MovieShopWepApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,Description,Year,Price,ImageUrl,MovieUrl,GenreId")] Movie movie)
+        public ActionResult Create([Bind(Include = "Id,Title,Description,Year,Price,ImageUrl,MovieUrl,Genre")] Movie movie)
         {
             if (ModelState.IsValid)
             {
@@ -55,7 +55,7 @@ namespace MovieShopWepApp.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.GenreId = new SelectList(GenMgr.ReadAll(), "Id", "Name", movie.GenreId);
+            ViewBag.GenreId = new SelectList(GenMgr.ReadAll(), "Id", "Name", movie.Genre.Id);
             ViewBag.Id = new SelectList(OrdMgr.ReadAll(), "Id", "Id", movie.Id);
             return View(movie);
         }
@@ -72,7 +72,7 @@ namespace MovieShopWepApp.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.GenreId = new SelectList(GenMgr.ReadAll(), "Id", "Name", movie.GenreId);
+            ViewBag.GenreId = new SelectList(GenMgr.ReadAll(), "Id", "Name", movie.Genre.Id);
             ViewBag.Id = new SelectList(OrdMgr.ReadAll(), "Id", "Id", movie.Id);
             return View(movie);
         }
@@ -89,7 +89,7 @@ namespace MovieShopWepApp.Controllers
                 MovMgr.Update(movie);
                 return RedirectToAction("Index");
             }
-            ViewBag.GenreId = new SelectList(GenMgr.ReadAll(), "Id", "Name", movie.GenreId);
+            ViewBag.GenreId = new SelectList(GenMgr.ReadAll(), "Id", "Name", movie.Genre.Id);
             ViewBag.Id = new SelectList(OrdMgr.ReadAll(), "Id", "Id", movie.Id);
             return View(movie);
         }

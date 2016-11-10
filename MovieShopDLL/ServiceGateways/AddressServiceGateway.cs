@@ -43,7 +43,7 @@ namespace ServiceGateway.ServiceGateways
 
         public override Address Update(Address t)
         {
-            HttpResponseMessage response = Client.PutAsJsonAsync("api/addresses", t).Result;
+            HttpResponseMessage response = Client.PutAsJsonAsync($"api/addresses/{t.Id}", t).Result;
             if (response.IsSuccessStatusCode)
             {
                 return response.Content.ReadAsAsync<Address>().Result;

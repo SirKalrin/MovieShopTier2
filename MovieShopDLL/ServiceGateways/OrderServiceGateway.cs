@@ -43,7 +43,7 @@ namespace ServiceGateway.ServiceGateways
 
         public override Order Update(Order t)
         {
-            HttpResponseMessage response = Client.PutAsJsonAsync("api/orders", t).Result;
+            HttpResponseMessage response = Client.PutAsJsonAsync($"api/orders/{t.Id}", t).Result;
             if (response.IsSuccessStatusCode)
             {
                 return response.Content.ReadAsAsync<Order>().Result;

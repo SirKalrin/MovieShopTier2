@@ -44,7 +44,7 @@ namespace ServiceGateway.ServiceGateways
 
         public override Customer Update(Customer t)
         {
-            HttpResponseMessage response = Client.PutAsJsonAsync("api/customers", t).Result;
+            HttpResponseMessage response = Client.PutAsJsonAsync($"api/customers/{t.Id}", t).Result;
             if (response.IsSuccessStatusCode)
             {
                 return response.Content.ReadAsAsync<Customer>().Result;

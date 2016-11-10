@@ -43,7 +43,7 @@ namespace ServiceGateway.ServiceGateways
 
         public override Movie Update(Movie t)
         {
-            HttpResponseMessage response = Client.PutAsJsonAsync("api/movies", t).Result;
+            HttpResponseMessage response = Client.PutAsJsonAsync($"api/movies/{t.Id}", t).Result;
             if (response.IsSuccessStatusCode)
             {
                 return response.Content.ReadAsAsync<Movie>().Result;
