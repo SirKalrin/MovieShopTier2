@@ -38,9 +38,8 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\..\MovieStoreTier1\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -67,8 +66,10 @@
     <Compile Include="Entities\Movie.cs" />
     <Compile Include="Entities\Order.cs" />
     <Compile Include="Interfaces\IServiceGateway.cs" />
+    <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="ServiceGateways\AbstractServiceGateway.cs" />
     <Compile Include="ServiceGateways\AddressServiceGateway.cs" />
+    <Compile Include="ServiceGateways\AuthorizationServiceGateway.cs" />
     <Compile Include="ServiceGateways\CustomerServiceGateway.cs" />
     <Compile Include="ServiceGateways\GenreServiceGateway.cs" />
     <Compile Include="ServiceGateways\MovieServiceGateway.cs" />

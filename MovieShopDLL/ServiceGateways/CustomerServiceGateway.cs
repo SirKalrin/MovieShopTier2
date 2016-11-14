@@ -14,6 +14,7 @@ namespace ServiceGateway.ServiceGateways
 
         public override Customer Create(Customer t)
         {
+            AddAuthorizationHeader();
             HttpResponseMessage response = Client.PostAsJsonAsync("api/customers/", t).Result;
             if (response.IsSuccessStatusCode)
             {
@@ -24,6 +25,7 @@ namespace ServiceGateway.ServiceGateways
 
         public override Customer Read(int id)
         {
+            AddAuthorizationHeader();
             HttpResponseMessage response = Client.GetAsync($"api/customers/{id}").Result;
             if (response.IsSuccessStatusCode)
             {
@@ -34,6 +36,7 @@ namespace ServiceGateway.ServiceGateways
 
         public override List<Customer> ReadAll()
         {
+            AddAuthorizationHeader();
             HttpResponseMessage response = Client.GetAsync("api/customers/").Result;
             if (response.IsSuccessStatusCode)
             {
@@ -44,6 +47,7 @@ namespace ServiceGateway.ServiceGateways
 
         public override Customer Update(Customer t)
         {
+            AddAuthorizationHeader();
             HttpResponseMessage response = Client.PutAsJsonAsync($"api/customers/{t.Id}", t).Result;
             if (response.IsSuccessStatusCode)
             {
@@ -54,6 +58,7 @@ namespace ServiceGateway.ServiceGateways
 
         public override bool Delete(int id)
         {
+            AddAuthorizationHeader();
             HttpResponseMessage response = Client.DeleteAsync($"api/customers/{id}").Result;
             if (response.IsSuccessStatusCode)
             {

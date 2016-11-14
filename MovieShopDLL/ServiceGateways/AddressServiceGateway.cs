@@ -13,6 +13,7 @@ namespace ServiceGateway.ServiceGateways
 
         public override Address Create(Address t)
         {
+            AddAuthorizationHeader();
             HttpResponseMessage response = Client.PostAsJsonAsync("api/addresses", t).Result;
             if (response.IsSuccessStatusCode)
             {
@@ -23,6 +24,7 @@ namespace ServiceGateway.ServiceGateways
 
         public override Address Read(int id)
         {
+            AddAuthorizationHeader();
             HttpResponseMessage response = Client.GetAsync($"api/addresses/{id}").Result;
             if (response.IsSuccessStatusCode)
             {
@@ -33,6 +35,7 @@ namespace ServiceGateway.ServiceGateways
 
         public override List<Address> ReadAll()
         {
+            AddAuthorizationHeader();
             HttpResponseMessage response = Client.GetAsync("api/addresses/").Result;
             if (response.IsSuccessStatusCode)
             {
@@ -43,6 +46,7 @@ namespace ServiceGateway.ServiceGateways
 
         public override Address Update(Address t)
         {
+            AddAuthorizationHeader();
             HttpResponseMessage response = Client.PutAsJsonAsync($"api/addresses/{t.Id}", t).Result;
             if (response.IsSuccessStatusCode)
             {
@@ -53,6 +57,7 @@ namespace ServiceGateway.ServiceGateways
 
         public override bool Delete(int id)
         {
+            AddAuthorizationHeader();
             HttpResponseMessage response = Client.DeleteAsync($"api/addresses/{id}").Result;
             if (response.IsSuccessStatusCode)
             {
