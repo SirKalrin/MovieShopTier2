@@ -47,8 +47,8 @@ namespace MovieShopWepApp.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CustomerId = new SelectList(CusMgr.ReadAll(), "Id", "FirstName", order.CustomerId);
-            ViewBag.MovieId = new SelectList(MovMgr.ReadAll(), "Id", "Title", order.MovieId);
+            ViewBag.CustomerId = new SelectList(CusMgr.ReadAll(), "Id", "FirstName", order.Customer.Id);
+            ViewBag.MovieId = new SelectList(MovMgr.ReadAll(), "Id", "Title", order.Movie.Id);
             ViewBag.Id = new SelectList(MovMgr.ReadAll(), "Id", "Title", order.Id);
             return View(order);
         }
@@ -58,18 +58,18 @@ namespace MovieShopWepApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,DateTime,CustomerId,MovieId")] Order order)
+        public ActionResult Edit([Bind(Include = "Id,DateTime,Customer,Movie")] Order order)
         {
             
             if (ModelState.IsValid)
             {
-                if (order.CustomerId != OrdMgr.Read(order.Id).CustomerId)
+                if (order.Customer.Id != OrdMgr.Read(order.Id).Customer.Id)
                 {
-                    Customer toHaveOrderRemoved = CusMgr.Read(OrdMgr.Read(order.Id).CustomerId);
+                    Customer toHaveOrderRemoved = CusMgr.Read(OrdMgr.Read(order.Id).Customer.Id);
                     toHaveOrderRemoved.Orders.RemoveAll(x => x.Id == order.Id);
                     CusMgr.Update(toHaveOrderRemoved);                   
                 }
-                if (order.MovieId != OrdMgr.Read(order.Id).Movie.Id)
+                if (order.Movie.Id != OrdMgr.Read(order.Id).Movie.Id)
                 {
                     Movie toHaveOrderRemoved = MovMgr.Read(OrdMgr.Read(order.Id).Movie.Id);
                     toHaveOrderRemoved.Orders.RemoveAll(x => x.Id == order.Id);
@@ -78,7 +78,7 @@ namespace MovieShopWepApp.Controllers
                 OrdMgr.Update(order);
                 return Redirect("~/admin/index");
             }
-            ViewBag.CustomerId = new SelectList(CusMgr.ReadAll(), "Id", "FirstName", order.CustomerId);
+            ViewBag.CustomerId = new SelectList(CusMgr.ReadAll(), "Id", "FirstName", order.Customer.Id);
             ViewBag.Id = new SelectList(MovMgr.ReadAll(), "Id", "Title", order.Id);
             return Redirect("~/admin/index");
         }

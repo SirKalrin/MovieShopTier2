@@ -66,7 +66,7 @@ namespace MovieShopWepApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult Checkout(int id, Customer customer)
+        public ActionResult Checkout([Bind(Include = "Id,FirstName,LastName,Email, Address")] int id, Customer customer)
         {
             if (customer.Id < 1)
             {
@@ -76,13 +76,17 @@ namespace MovieShopWepApp.Controllers
             {
                 customer = _customerServiceGateway.Update(customer);
             }
-            var movie = _movieServiceGateway.Read(id);
-            var order = new Order() { MovieId = movie.Id, CustomerId = customer.Id, DateTime = DateTime.Now };
-            order = _orderServiceGateway.Create(order);
-            movie.Orders.Add(order);
-            customer.Orders.Add(order);
-            _movieServiceGateway.Update(movie);
-            _customerServiceGateway.Update(customer);
+
+            var order = new Order() {Movie = new Movie() {Id = id}, Customer = new Customer() { Id = customer.Id }, DateTime = DateTime.Now};
+
+            //var movie = _movieServiceGateway.Read(id);
+            //var order = new Order() { Movie = movie, Customer = customer, DateTime = DateTime.Now };
+            _orderServiceGateway.Create(order);
+
+            //movie.Orders.Add(order);
+            //customer.Orders.Add(order);
+            //_movieServiceGateway.Update(movie);
+            //_customerServiceGateway.Update(customer);
             return RedirectToAction("Index");
         }
 
