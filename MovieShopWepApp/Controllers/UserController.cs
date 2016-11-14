@@ -14,10 +14,10 @@ namespace MovieShopWepApp.Controllers
 {
     public class UserController : Controller
     {
-        private AbstractServiceGateway<Genre, int> _genreServiceGateway = new ServiceGatewayFacade().GetGenreServiceGateway();
-        private AbstractServiceGateway<Movie, int> _movieServiceGateway = new ServiceGatewayFacade().GetMovieServiceGateway();
-        private AbstractServiceGateway<Customer, int> _customerServiceGateway = new ServiceGatewayFacade().GetCustomerServiceGateway();
-        private AbstractServiceGateway<Order, int> _orderServiceGateway = new ServiceGatewayFacade().GetOrderServiceGateway();
+        private IServiceGateway<Genre, int> _genreServiceGateway = new ServiceGatewayFacade().GetGenreServiceGateway();
+        private IServiceGateway<Movie, int> _movieServiceGateway = new ServiceGatewayFacade().GetMovieServiceGateway();
+        private IServiceGateway<Customer, int> _customerServiceGateway = new ServiceGatewayFacade().GetCustomerServiceGateway();
+        private IServiceGateway<Order, int> _orderServiceGateway = new ServiceGatewayFacade().GetOrderServiceGateway();
 
         // GET: User
         public ActionResult Index(int? id)

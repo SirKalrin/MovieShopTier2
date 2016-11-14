@@ -4,7 +4,7 @@ using ServiceGateway.Entities;
 
 namespace ServiceGateway.ServiceGateways
 {
-    public class GenreServiceGateway : AbstractServiceGateway<Genre, int>
+    public class GenreServiceGateway : AbstractServiceGateway, IServiceGateway<Genre, int>
     {
 
         public GenreServiceGateway() : base()
@@ -12,7 +12,7 @@ namespace ServiceGateway.ServiceGateways
 
         }
 
-        public override Genre Create(Genre t)
+        public Genre Create(Genre t)
         {
             AddAuthorizationHeader();
             HttpResponseMessage response = Client.PostAsJsonAsync("api/genres", t).Result;
@@ -23,7 +23,7 @@ namespace ServiceGateway.ServiceGateways
             return null;
         }
 
-        public override Genre Read(int id)
+        public Genre Read(int id)
         {
             AddAuthorizationHeader();
             HttpResponseMessage response = Client.GetAsync($"api/genres/{id}").Result;
@@ -34,7 +34,7 @@ namespace ServiceGateway.ServiceGateways
             return null;
         }
 
-        public override List<Genre> ReadAll()
+        public List<Genre> ReadAll()
         {
             AddAuthorizationHeader();
             HttpResponseMessage response = Client.GetAsync("api/genres/").Result;
@@ -45,7 +45,7 @@ namespace ServiceGateway.ServiceGateways
             return null;
         }
 
-        public override Genre Update(Genre t)
+        public Genre Update(Genre t)
         {
             AddAuthorizationHeader();
             HttpResponseMessage response = Client.PutAsJsonAsync($"api/genres/{t.Id}", t).Result;
@@ -56,7 +56,7 @@ namespace ServiceGateway.ServiceGateways
             return null;
         }
 
-        public override bool Delete(int id)
+        public bool Delete(int id)
         {
             AddAuthorizationHeader();
             HttpResponseMessage response = Client.DeleteAsync($"api/genres/{id}").Result;

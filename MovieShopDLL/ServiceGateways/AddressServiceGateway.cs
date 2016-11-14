@@ -4,14 +4,14 @@ using ServiceGateway.Entities;
 
 namespace ServiceGateway.ServiceGateways
 {
-    public class AddressServiceGateway : AbstractServiceGateway<Address, int>
+    public class AddressServiceGateway : AbstractServiceGateway, IServiceGateway<Address, int>
     {
         public AddressServiceGateway() : base()
         {
 
         }
 
-        public override Address Create(Address t)
+        public Address Create(Address t)
         {
             AddAuthorizationHeader();
             HttpResponseMessage response = Client.PostAsJsonAsync("api/addresses", t).Result;
@@ -22,7 +22,7 @@ namespace ServiceGateway.ServiceGateways
             return null;
         }
 
-        public override Address Read(int id)
+        public Address Read(int id)
         {
             AddAuthorizationHeader();
             HttpResponseMessage response = Client.GetAsync($"api/addresses/{id}").Result;
@@ -33,7 +33,7 @@ namespace ServiceGateway.ServiceGateways
             return null;
         }
 
-        public override List<Address> ReadAll()
+        public List<Address> ReadAll()
         {
             AddAuthorizationHeader();
             HttpResponseMessage response = Client.GetAsync("api/addresses/").Result;
@@ -44,7 +44,7 @@ namespace ServiceGateway.ServiceGateways
             return null;
         }
 
-        public override Address Update(Address t)
+        public Address Update(Address t)
         {
             AddAuthorizationHeader();
             HttpResponseMessage response = Client.PutAsJsonAsync($"api/addresses/{t.Id}", t).Result;
@@ -55,7 +55,7 @@ namespace ServiceGateway.ServiceGateways
             return null;
         }
 
-        public override bool Delete(int id)
+        public bool Delete(int id)
         {
             AddAuthorizationHeader();
             HttpResponseMessage response = Client.DeleteAsync($"api/addresses/{id}").Result;

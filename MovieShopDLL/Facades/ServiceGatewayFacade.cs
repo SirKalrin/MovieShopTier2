@@ -5,33 +5,33 @@ namespace ServiceGateway
 {
     public class ServiceGatewayFacade
     {
-        private AbstractServiceGateway<Customer, int> cm;
-        private AbstractServiceGateway<Movie, int> mm;
-        private AbstractServiceGateway<Order, int> om;
-        private AbstractServiceGateway<Genre, int> gm;
-        private AbstractServiceGateway<Address, int> am;
+        private IServiceGateway<Customer, int> cm;
+        private IServiceGateway<Movie, int> mm;
+        private IServiceGateway<Order, int> om;
+        private IServiceGateway<Genre, int> gm;
+        private IServiceGateway<Address, int> am;
 
-        public AbstractServiceGateway<Customer, int> GetCustomerServiceGateway()
+        public IServiceGateway<Customer, int> GetCustomerServiceGateway()
         {
             return cm ?? (cm = new CustomerServiceGateway());
         }
 
-        public AbstractServiceGateway<Movie, int> GetMovieServiceGateway()
+        public IServiceGateway<Movie, int> GetMovieServiceGateway()
         {
             return mm ?? (mm = new MovieServiceGateway());
         }
 
-        public AbstractServiceGateway<Order, int> GetOrderServiceGateway()
+        public IServiceGateway<Order, int> GetOrderServiceGateway()
         {
             return om ?? (om = new OrderServiceGateway());
         }
 
-        public AbstractServiceGateway<Genre, int> GetGenreServiceGateway()
+        public IServiceGateway<Genre, int> GetGenreServiceGateway()
         {
             return gm ?? (gm = new GenreServiceGateway());
         }
 
-        public AbstractServiceGateway<Address, int> GetAddressServiceGateway()
+        public IServiceGateway<Address, int> GetAddressServiceGateway()
         {
             return am ?? (am = new AddressServiceGateway());
         }
