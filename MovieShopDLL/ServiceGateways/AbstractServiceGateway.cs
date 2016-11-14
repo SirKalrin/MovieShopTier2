@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Configuration;
 using ServiceGateway.Entities;
 
@@ -21,6 +22,14 @@ namespace ServiceGateway.ServiceGateways
             Client.DefaultRequestHeaders.Accept.Clear();
             Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
+        }
+        protected void AddAuthorizationHeader()
+        {
+            if (HttpContext.Current.Session["token"] != null)
+            {
+                string token = HttpContext.Current.Session["token"].ToString();
+                Client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+            }
         }
 
         public abstract T Create(T t);

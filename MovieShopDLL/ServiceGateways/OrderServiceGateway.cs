@@ -13,6 +13,7 @@ namespace ServiceGateway.ServiceGateways
 
         public override Order Create(Order t)
         {
+            AddAuthorizationHeader();
             HttpResponseMessage response = Client.PostAsJsonAsync("api/orders", t).Result;
             if (response.IsSuccessStatusCode)
             {
@@ -23,6 +24,7 @@ namespace ServiceGateway.ServiceGateways
 
         public override Order Read(int id)
         {
+            AddAuthorizationHeader();
             HttpResponseMessage response = Client.GetAsync($"api/orders/{id}").Result;
             if (response.IsSuccessStatusCode)
             {
@@ -33,6 +35,7 @@ namespace ServiceGateway.ServiceGateways
 
         public override List<Order> ReadAll()
         {
+            AddAuthorizationHeader();
             HttpResponseMessage response = Client.GetAsync("api/orders/").Result;
             if (response.IsSuccessStatusCode)
             {
@@ -43,6 +46,7 @@ namespace ServiceGateway.ServiceGateways
 
         public override Order Update(Order t)
         {
+            AddAuthorizationHeader();
             HttpResponseMessage response = Client.PutAsJsonAsync($"api/orders/{t.Id}", t).Result;
             if (response.IsSuccessStatusCode)
             {
@@ -53,6 +57,7 @@ namespace ServiceGateway.ServiceGateways
 
         public override bool Delete(int id)
         {
+            AddAuthorizationHeader();
             HttpResponseMessage response = Client.DeleteAsync($"api/orders/{id}").Result;
             if (response.IsSuccessStatusCode)
             {

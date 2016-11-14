@@ -13,6 +13,7 @@ namespace ServiceGateway.ServiceGateways
 
         public override Movie Create(Movie t)
         {
+            AddAuthorizationHeader();
             HttpResponseMessage response = Client.PostAsJsonAsync("api/movies", t).Result;
             if (response.IsSuccessStatusCode)
             {
@@ -23,6 +24,7 @@ namespace ServiceGateway.ServiceGateways
 
         public override Movie Read(int id)
         {
+            AddAuthorizationHeader();
             HttpResponseMessage response = Client.GetAsync($"api/movies/{id}").Result;
             if (response.IsSuccessStatusCode)
             {
@@ -33,6 +35,7 @@ namespace ServiceGateway.ServiceGateways
 
         public override List<Movie> ReadAll()
         {
+            AddAuthorizationHeader();
             HttpResponseMessage response = Client.GetAsync("api/movies/").Result;
             if (response.IsSuccessStatusCode)
             {
@@ -43,6 +46,7 @@ namespace ServiceGateway.ServiceGateways
 
         public override Movie Update(Movie t)
         {
+            AddAuthorizationHeader();
             HttpResponseMessage response = Client.PutAsJsonAsync($"api/movies/{t.Id}", t).Result;
             if (response.IsSuccessStatusCode)
             {
@@ -53,6 +57,7 @@ namespace ServiceGateway.ServiceGateways
 
         public override bool Delete(int id)
         {
+            AddAuthorizationHeader();
             HttpResponseMessage response = Client.DeleteAsync($"api/movies/{id}").Result;
             if (response.IsSuccessStatusCode)
             {

@@ -56,6 +56,7 @@ namespace MovieShopWepApp.Controllers
 
 
         [HttpGet]
+        [Authorize]
         public ActionResult Checkout(int id, string email)
         {
             var movieToOrder = _movieServiceGateway.Read(id);
