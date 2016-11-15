@@ -70,6 +70,7 @@
     <Compile Include="ServiceGateways\AbstractServiceGateway.cs" />
     <Compile Include="ServiceGateways\AddressServiceGateway.cs" />
     <Compile Include="ServiceGateways\AuthorizationServiceGateway.cs" />
+    <Compile Include="ServiceGateways\CurrencyConverterServiceGateway.cs" />
     <Compile Include="ServiceGateways\CustomerServiceGateway.cs" />
     <Compile Include="ServiceGateways\GenreServiceGateway.cs" />
     <Compile Include="ServiceGateways\MovieServiceGateway.cs" />

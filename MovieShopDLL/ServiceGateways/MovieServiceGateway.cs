@@ -4,14 +4,14 @@ using ServiceGateway.Entities;
 
 namespace ServiceGateway.ServiceGateways
 {
-    public class MovieServiceGateway : AbstractServiceGateway<Movie, int>
+    public class MovieServiceGateway : AbstractServiceGateway, IServiceGateway<Movie, int>
     {
         public MovieServiceGateway() : base()
         {
 
         }
 
-        public override Movie Create(Movie t)
+        public Movie Create(Movie t)
         {
             AddAuthorizationHeader();
             HttpResponseMessage response = Client.PostAsJsonAsync("api/movies", t).Result;
@@ -22,7 +22,7 @@ namespace ServiceGateway.ServiceGateways
             return null;
         }
 
-        public override Movie Read(int id)
+        public Movie Read(int id)
         {
             AddAuthorizationHeader();
             HttpResponseMessage response = Client.GetAsync($"api/movies/{id}").Result;
@@ -33,7 +33,7 @@ namespace ServiceGateway.ServiceGateways
             return null;
         }
 
-        public override List<Movie> ReadAll()
+        public List<Movie> ReadAll()
         {
             AddAuthorizationHeader();
             HttpResponseMessage response = Client.GetAsync("api/movies/").Result;
@@ -44,7 +44,7 @@ namespace ServiceGateway.ServiceGateways
             return null;
         }
 
-        public override Movie Update(Movie t)
+        public Movie Update(Movie t)
         {
             AddAuthorizationHeader();
             HttpResponseMessage response = Client.PutAsJsonAsync($"api/movies/{t.Id}", t).Result;
@@ -55,7 +55,7 @@ namespace ServiceGateway.ServiceGateways
             return null;
         }
 
-        public override bool Delete(int id)
+        public bool Delete(int id)
         {
             AddAuthorizationHeader();
             HttpResponseMessage response = Client.DeleteAsync($"api/movies/{id}").Result;

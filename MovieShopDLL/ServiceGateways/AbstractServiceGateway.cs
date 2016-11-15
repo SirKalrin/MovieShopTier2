@@ -11,7 +11,7 @@ using ServiceGateway.Entities;
 
 namespace ServiceGateway.ServiceGateways
 {
-    public abstract class AbstractServiceGateway<T, K> : IServiceGateway<T, K> where T : AbstractEntity
+    public abstract class AbstractServiceGateway
     {
 
         protected HttpClient Client = new HttpClient();
@@ -31,11 +31,5 @@ namespace ServiceGateway.ServiceGateways
                 Client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
             }
         }
-
-        public abstract T Create(T t);
-        public abstract T Read(K id);
-        public abstract List<T> ReadAll();
-        public abstract T Update(T t);
-        public abstract bool Delete(K id);
     }
 }

@@ -4,14 +4,14 @@ using ServiceGateway.Entities;
 
 namespace ServiceGateway.ServiceGateways
 {
-    public class OrderServiceGateway : AbstractServiceGateway<Order, int>
+    public class OrderServiceGateway : AbstractServiceGateway, IServiceGateway<Order, int>
     {
         public OrderServiceGateway() : base()
         {
 
         }
 
-        public override Order Create(Order t)
+        public Order Create(Order t)
         {
             AddAuthorizationHeader();
             HttpResponseMessage response = Client.PostAsJsonAsync("api/orders", t).Result;
@@ -22,7 +22,7 @@ namespace ServiceGateway.ServiceGateways
             return null;
         }
 
-        public override Order Read(int id)
+        public Order Read(int id)
         {
             AddAuthorizationHeader();
             HttpResponseMessage response = Client.GetAsync($"api/orders/{id}").Result;
@@ -34,7 +34,7 @@ namespace ServiceGateway.ServiceGateways
             return null;
         }
 
-        public override List<Order> ReadAll()
+        public List<Order> ReadAll()
         {
             AddAuthorizationHeader();
             HttpResponseMessage response = Client.GetAsync("api/orders/").Result;
@@ -45,7 +45,7 @@ namespace ServiceGateway.ServiceGateways
             return null;
         }
 
-        public override Order Update(Order t)
+        public Order Update(Order t)
         {
             AddAuthorizationHeader();
             HttpResponseMessage response = Client.PutAsJsonAsync($"api/orders/{t.Id}", t).Result;
@@ -56,7 +56,7 @@ namespace ServiceGateway.ServiceGateways
             return null;
         }
 
-        public override bool Delete(int id)
+        public bool Delete(int id)
         {
             AddAuthorizationHeader();
             HttpResponseMessage response = Client.DeleteAsync($"api/orders/{id}").Result;

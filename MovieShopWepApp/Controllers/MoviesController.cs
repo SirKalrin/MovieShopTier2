@@ -8,10 +8,10 @@ namespace MovieShopWepApp.Controllers
 {
     public class MoviesController : Controller
     {
-        private AbstractServiceGateway<Movie, int> MovMgr = new ServiceGatewayFacade().GetMovieServiceGateway();
-        private AbstractServiceGateway<Order, int> OrdMgr = new ServiceGatewayFacade().GetOrderServiceGateway();
-        private AbstractServiceGateway<Customer, int> CusMgr = new ServiceGatewayFacade().GetCustomerServiceGateway();
-        private AbstractServiceGateway<Genre, int> GenMgr = new ServiceGatewayFacade().GetGenreServiceGateway();
+        private IServiceGateway<Movie, int> MovMgr = new ServiceGatewayFacade().GetMovieServiceGateway();
+        private IServiceGateway<Order, int> OrdMgr = new ServiceGatewayFacade().GetOrderServiceGateway();
+        private IServiceGateway<Customer, int> CusMgr = new ServiceGatewayFacade().GetCustomerServiceGateway();
+        private IServiceGateway<Genre, int> GenMgr = new ServiceGatewayFacade().GetGenreServiceGateway();
 
         // GET: Movies
         public ActionResult Index()

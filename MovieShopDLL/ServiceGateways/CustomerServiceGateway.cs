@@ -4,7 +4,7 @@ using ServiceGateway.Entities;
 
 namespace ServiceGateway.ServiceGateways
 {
-    public class CustomerServiceGateway : AbstractServiceGateway<Customer, int>
+    public class CustomerServiceGateway : AbstractServiceGateway, IServiceGateway<Customer, int>
     {
 
         public CustomerServiceGateway() : base()
@@ -12,7 +12,7 @@ namespace ServiceGateway.ServiceGateways
             
         }
 
-        public override Customer Create(Customer t)
+        public Customer Create(Customer t)
         {
             AddAuthorizationHeader();
             HttpResponseMessage response = Client.PostAsJsonAsync("api/customers/", t).Result;
@@ -23,7 +23,7 @@ namespace ServiceGateway.ServiceGateways
             return null;
         }
 
-        public override Customer Read(int id)
+        public Customer Read(int id)
         {
             AddAuthorizationHeader();
             HttpResponseMessage response = Client.GetAsync($"api/customers/{id}").Result;
@@ -34,7 +34,7 @@ namespace ServiceGateway.ServiceGateways
             return null;
         }
 
-        public override List<Customer> ReadAll()
+        public List<Customer> ReadAll()
         {
             AddAuthorizationHeader();
             HttpResponseMessage response = Client.GetAsync("api/customers/").Result;
@@ -45,7 +45,7 @@ namespace ServiceGateway.ServiceGateways
             return null;
         }
 
-        public override Customer Update(Customer t)
+        public Customer Update(Customer t)
         {
             AddAuthorizationHeader();
             HttpResponseMessage response = Client.PutAsJsonAsync($"api/customers/{t.Id}", t).Result;
@@ -56,7 +56,7 @@ namespace ServiceGateway.ServiceGateways
             return null;
         }
 
-        public override bool Delete(int id)
+        public bool Delete(int id)
         {
             AddAuthorizationHeader();
             HttpResponseMessage response = Client.DeleteAsync($"api/customers/{id}").Result;
