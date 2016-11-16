@@ -87,19 +87,15 @@ namespace MovieShopWepApp.Controllers
 
             return View(model);
         }
-
-        public ActionResult Logout()
+        [AllowAnonymous]
+        public ActionResult Logout(LogoutModel model)
         {
-            HttpResponseMessage response = gateway.Logout();
-            if (response.IsSuccessStatusCode)
+            var logout = model.logout();
+            if (logout.Count == 0)
             {
                 return RedirectToAction("Login", "Account");
             }
-            else
-            {
-                ModelState.AddModelError("", response.Content.ReadAsStringAsync().Result);
-            }
-            return RedirectToAction("Index", "User");
+            return RedirectToAction("index", "User");
 
         }
 

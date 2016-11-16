@@ -56,28 +56,5 @@ namespace ServiceGateway.ServiceGateways
 
             return response;
         }
-
-        public HttpResponseMessage Logout()
-        {
-            IDictionary<string, string> data = new Dictionary<string, string>
-                {
-                    { "userName", "password" }
-                };
-            AuthenticationProperties properties = new AuthenticationProperties(data);
-
-            HttpResponseMessage response = client.PostAsJsonAsync("api/account/logout", properties).Result;
-            response.EnsureSuccessStatusCode();
-            return response;
-        }
-
-        //private void AddAuthorizationHeader()
-        //{
-        //    if (HttpContext.Current.Session["token"] != null)
-        //    {
-        //        string token = HttpContext.Current.Session["token"].ToString();
-        //        client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
-        //    }
-        //}
-
     }
 }

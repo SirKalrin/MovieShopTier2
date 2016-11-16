@@ -10,5 +10,6 @@ namespace MovieShopWepApp.Models
     {
         public Genre Genre { get; set; }
         public List<Movie> Movies { get; set; }
+
     }
 }
