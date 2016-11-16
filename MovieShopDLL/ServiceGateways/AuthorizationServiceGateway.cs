@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Configuration;
+using Microsoft.Owin.Security;
 using MovieShopWepApp.Models;
 using Newtonsoft.Json.Linq;
 
@@ -53,6 +54,19 @@ namespace ServiceGateway.ServiceGateways
                 HttpContext.Current.Session["token"] = token;
             }
 
+            return response;
+        }
+
+        public HttpResponseMessage Logout()
+        {
+            IDictionary<string, string> data = new Dictionary<string, string>
+                {
+                    { "userName", "password" }
+                };
+            AuthenticationProperties properties = new AuthenticationProperties(data);
+
+            HttpResponseMessage response = client.PostAsJsonAsync("api/account/logout", properties).Result;
+            response.EnsureSuccessStatusCode();
             return response;
         }
 

@@ -24,8 +24,16 @@ namespace MovieShopWepApp.Controllers
         {
             try
             {
-                return View(new AdminViewModel() { Customers = cusMgr.ReadAll(), Movies = movMgr.ReadAll(), Orders = ordMgr.ReadAll() });
+                return
+                View(new AdminViewModel()
+                {
+                Customers = cusMgr.ReadAll(),
+                Movies = movMgr.ReadAll(),
+                Orders = ordMgr.ReadAll()
+                });
             }
+
+
             catch (HttpRequestException ex)
             {
                 if (ex.Message.Contains("401"))
@@ -33,10 +41,10 @@ namespace MovieShopWepApp.Controllers
 
                 ViewBag.Error = ex.Message;
                 return View("Error");
-
             }
-            
-        }  
+
+
+        }
 
 
     }

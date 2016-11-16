@@ -29,6 +29,7 @@
             <tr>
                 <td class="type">Price:</td>
                 <td class="value">@Model.Price</td>
+
             </tr>
             <tr>
                 <td class="type">Summary:</td>
@@ -36,6 +37,8 @@
                 <td>
                     <a class="btn btn-success" href='@Url.Action("Checkout", "User", new { id = @Model.Id })'>Checkout</a>
                     <a class="btn btn-warning" href="'../Index'">Back</a>
+
+
 
                 </td>
             </tr>
