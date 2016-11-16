@@ -1,4 +1,5 @@
 ﻿@using System.Threading
+@using ExchangeRate
 @using MovieShopWepApp.Models
 @using ServiceGateway.Entities
 @model UserViewModel
@@ -6,6 +7,7 @@
 @{
     ViewBag.data = "Index";
 }
+
 <h3></h3>
 <div id="Menu" class="nav-side-menu">
     <div class="brand">Menu</div>
@@ -24,11 +26,13 @@
                 <a href="#"><i class="fa fa-gift fa-lg"></i> Genres <span class="arrow"></span></a>
             </li>
             <ul class="sub-menu collapse" id="products">
+                <li class="active">
+                    <a onclick="FilterMovies(null, '@Model.CurrentCurrency')">All Genres</a>
+                </li>
                 @foreach (Genre genre in @Model.Genres)
                 {
                     <li class="active">
-                        <a onclick="FilterMovies(@genre.Id)">@genre.Name</a>
-                        @*@Ajax.ActionLink(genre.Name, "GetMoviesResult", new {id = genre.Id}, null);*@
+                        <a onclick="FilterMovies(@genre.Id, '@Model.CurrentCurrency');">@genre.Name</a>
                     </li>
                 }
             </ul>
@@ -36,25 +40,50 @@
     </div>
 </div>
 
+<div style="margin-left: 17%" class="header">
+    Movie Selection
+    @*<div align="right" class="container">
+        <div class="dropdown">
+            <button class="dropdown-toggle" type="button" data-toggle="dropdown">
+                Currency
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a onclick="FilterMovies(null, '@Iso4217.DKK');" href="#">DDK</a></li>
+                <li><a onclick="FilterMovies(null, '@Iso4217.EUR');" href="#">EUR</a></li>
+                <li><a onclick="FilterMovies(null, '@Iso4217.USD');" href="#">USD</a></li>
+                <li><a onclick="FilterMovies(null, '@Iso4217.GBP');" href="#">GBP</a></li>
+            </ul>
+        </div>
+    </div>*@
+
+    <select id="selectBox" onchange="FilterMovies(null, value);" style="margin-left: 80%; width: 60px" name="Currencies">
+            <option value="@Iso4217.DKK">DKK</option>
+            <option value="@Iso4217.EUR">EUR</option>
+            <option value="@Iso4217.USD">USD</option>
+            <option value="@Iso4217.GBP">GBP</option>
+        </select>
+</div>
+
 <div style="width: 100%; height: 78vh" id="osterlaekkert">
-    @{ Html.RenderPartial("PartialMovieView", Model.Movies);}
+    @{ Html.RenderPartial("PartialMovieView", new PartialViewModel() { Movies = Model.Movies, CurrentCurrency = Model.CurrentCurrency });}
 </div>
 
 <script type="text/javascript">
-    var FilterMovies = function (genreId) {
+    var FilterMovies = function (genreId, currentCurrency) {
         $.ajax({
-            dataType: "html",
-            url: '@Url.Action("GetMoviesResult")',
-            data: { id: genreId },
-            success: function (data) {
-                $('#osterlaekkert').html(data);
-            },
-            error: function () {
-                $('#osterlaekkert').html("<h3>Couldn't do that</h3>");
+                dataType: "html",
+                url: '@Url.Action("GetMoviesResult")',
+            data: { id: genreId, currency: currentCurrency },
+                success: function (data) {
+                
+                    $('#osterlaekkert').html(data);
+                },
+                error: function () {
+                    $('#osterlaekkert').html("<h3>Couldn't do that</h3>");
+                }
             }
-        }
-    )};
-
-</script>  
+        )};
+</script>
 
 

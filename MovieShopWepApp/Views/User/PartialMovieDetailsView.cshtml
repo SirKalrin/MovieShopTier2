@@ -1,5 +1,6 @@
 ﻿
-@model ServiceGateway.Entities.Movie
+@using ServiceGateway.ServiceGateways
+@model MovieShopWepApp.Models.PartialMovieDetailsViewModel
 
 @{
     ViewBag.Title = "PartialMovieDetailsView";
@@ -10,7 +11,7 @@
 </head>
 <body>
     <div style="width: 50%; height: 70%">
-
+        @{ double rate = CurrencyConverterService.GetCurrency(Model.CurrentCurrency); }
         <p id="title" style="height: 10%">Movie Details</p><a href="#close" title="Close" class="close">X</a>
         <div style="height: 50%; margin-top: 2%" class="row">
             <div style="height: 100%" class="col-xs-4">
@@ -19,7 +20,7 @@
                         <p class="type">Title:</p>
                     </div>
                     <div class="col-xs-6">
-                        <p class="value">@Model.Title</p>
+                        <p class="value">@Model.Movie.Title</p>
                     </div>
                 </div>
                 <div style="height: 25%" class="row">
@@ -27,7 +28,7 @@
                         <p class="type">Genre:</p>
                     </div>
                     <div class="col-xs-6">
-                        <p class="value">@Model.Genre.Name</p>
+                        <p class="value">@Model.Movie.Genre.Name</p>
                     </div>
                 </div>
                 <div style="height: 25%" class="row">
@@ -35,7 +36,7 @@
                         <p class="type">Released:</p>
                     </div>
                     <div class="col-xs-6">
-                        <p class="value">@Model.Year</p>
+                        <p class="value">@Model.Movie.Year</p>
                     </div>
                 </div>
                 <div style="height: 25%" class="row">
@@ -43,12 +44,12 @@
                         <p class="type">Price:</p>
                     </div>
                     <div class="col-xs-6">
-                        <p class="value">@Model.Price</p>
+                        <p class="value">@(Model.Movie.Price * rate) @Model.CurrentCurrency.ToString()</p>
                     </div>
                 </div>
             </div>
             <div style="height: 100%" align="right" class="col-xs-8">
-                <iframe src="@Model.MovieUrl"></iframe>
+                <iframe src="@Model.Movie.MovieUrl"></iframe>
             </div>
         </div>
         <div style="height: 27%; margin-top: 1%" class="row">
@@ -56,7 +57,7 @@
                 <p class="type">Summary:</p>
             </div>
             <div align="left" class="col-xs-8">
-                <p class="value">@Model.Description</p>
+                <p class="value">@Model.Movie.Description</p>
             </div>
         </div>
 
@@ -90,7 +91,7 @@
             </div>*@
 
         <div style="height: 9%; margin-bottom: 1%" align="right">
-            <a class="btn btn-success" href='@Url.Action("Checkout", "User", new {id = @Model.Id})'>Checkout</a>
+            <a class="btn btn-success" href='@Url.Action("Checkout", "User", new {id = @Model.Movie.Id})'>Checkout</a>
         </div>
     </div>
 </body>

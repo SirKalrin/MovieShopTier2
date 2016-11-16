@@ -1,11 +1,15 @@
-﻿@using System.Diagnostics.Eventing.Reader
-@using ServiceGateway.Entities
-@model List<Movie>
+﻿@using ServiceGateway.ServiceGateways
+@model MovieShopWepApp.Models.PartialViewModel
     
-<div style="margin-left: 17%" class="header">Movie Selection</div>
+<head>
+    <link rel="stylesheet" type="text/css" href="~/Styles/MovieDetailsStylesheet.css">
+</head>
+
 <div id="movies" class="row list-group pre-scrollable" style="margin-left: 17%; min-height: 60%; max-height: 90%">
     
-    @foreach (var movie in Model)
+
+    @{ double rate = CurrencyConverterService.GetCurrency(Model.CurrentCurrency); }
+    @foreach (var movie in Model.Movies)
     {
         <div style="margin-bottom: 2%;" class="item  col-xs-3 col-lg-3">
             <div id="moviespace" class="thumbnail">
@@ -21,11 +25,11 @@
                     <div class="row">
                         <div class="col-xs-12 col-md-6">
                             <p class="lead; info">
-                                Price: @movie.Price
+                                Price: @(movie.Price*rate) @Model.CurrentCurrency.ToString()
                             </p>
                         </div>
                         <div class="col-xs-12 col-md-6">
-                            <a href="#openModal" onclick="ShowDetails(@movie.Id)"><img width="130" height="60" src="http://blog.performance-bmw.com/wp-content/uploads/2015/10/Details-button.png"/></a>
+                            <a href="#openModal" onclick="ShowDetails(@movie.Id, '@Model.CurrentCurrency')"><img width="130" height="60" src="http://blog.performance-bmw.com/wp-content/uploads/2015/10/Details-button.png"/></a>
                         </div>
                     </div>
                 </div>
@@ -36,17 +40,15 @@
 </div>
 
 <div id="openModal" class="modalDialog">
-    <div>
-        @{ Html.RenderPartial("PartialMovieDetailsView", new Movie() { Genre = new Genre() { Movies = new List<Movie>() } });}
-    </div>
+
 </div>
 
 <script type="text/javascript">
-    var ShowDetails = function (movieId) {
+    var ShowDetails = function (movieId, currentCurrency) {
         $.ajax({
             dataType: "html",
             url: '@Url.Action("GetMovieDetails")',
-            data: { id: movieId },
+            data: { id: movieId, currency: currentCurrency },
             success: function (data) {
                 $('#openModal').html(data);
             },

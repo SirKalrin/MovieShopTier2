@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="~/Styles/MovieDetailsStylesheet.css">
 </head>
 <body>
+    @*@{ float exchangeRate = ViewBag.ExchangeRate; }*@
     <div style="width: 50%; height: 70%;">
         <table>
             <thead>Movie Details</thead>
@@ -28,13 +29,13 @@
             </tr>
             <tr>
                 <td class="type">Price:</td>
-                <td class="value">@Model.Price</td>
+                <td class="value">@(Model.Price*ViewBag.ExchangeRate)</td>
             </tr>
             <tr>
                 <td class="type">Summary:</td>
                 <td colspan="2">@Model.Description</td>
                 <td>
-                    <a class="btn btn-success" href='@Url.Action("Checkout", "User", new { id = @Model.Id })'>Checkout</a>
+                    <a class="btn btn-success" href='@Url.Action("Checkout", "User", new {id = @Model.Id})'>Checkout</a>
                     <a class="btn btn-warning" href="'../Index'">Back</a>
 
                 </td>

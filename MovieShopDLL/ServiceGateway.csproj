@@ -38,6 +38,10 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="ExchangeRate, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\exchange-rate.1.0.3\lib\net452\ExchangeRate.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -70,7 +74,7 @@
     <Compile Include="ServiceGateways\AbstractServiceGateway.cs" />
     <Compile Include="ServiceGateways\AddressServiceGateway.cs" />
     <Compile Include="ServiceGateways\AuthorizationServiceGateway.cs" />
-    <Compile Include="ServiceGateways\CurrencyConverterServiceGateway.cs" />
+    <Compile Include="ServiceGateways\CurrencyConverterService.cs" />
     <Compile Include="ServiceGateways\CustomerServiceGateway.cs" />
     <Compile Include="ServiceGateways\GenreServiceGateway.cs" />
     <Compile Include="ServiceGateways\MovieServiceGateway.cs" />

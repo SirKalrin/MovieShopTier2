@@ -28,7 +28,8 @@ namespace ServiceGateway.ServiceGateways
             HttpResponseMessage response = Client.GetAsync($"api/movies/{id}").Result;
             if (response.IsSuccessStatusCode)
             {
-                return response.Content.ReadAsAsync<Movie>().Result;
+                var movie = response.Content.ReadAsAsync<Movie>().Result;
+                return movie;
             }
             return null;
         }
