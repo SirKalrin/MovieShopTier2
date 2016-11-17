@@ -19,6 +19,7 @@
 
 @using (Html.BeginForm("Checkout", "User", FormMethod.Post))
 {
+    @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.movie.Id)
 
     @Html.HiddenFor(model => model.customer.Id)

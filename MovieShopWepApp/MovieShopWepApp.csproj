@@ -217,6 +217,7 @@
     <Compile Include="Models\CheckoutViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\PartialMovieDetailsViewModel.cs" />
+    <Compile Include="Models\LogoutModel.cs" />
     <Compile Include="Models\PartialViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />

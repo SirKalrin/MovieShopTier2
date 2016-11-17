@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Configuration;
+using Microsoft.Owin.Security;
 using MovieShopWepApp.Models;
 using Newtonsoft.Json.Linq;
 
@@ -55,15 +56,5 @@ namespace ServiceGateway.ServiceGateways
 
             return response;
         }
-
-        //private void AddAuthorizationHeader()
-        //{
-        //    if (HttpContext.Current.Session["token"] != null)
-        //    {
-        //        string token = HttpContext.Current.Session["token"].ToString();
-        //        client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
-        //    }
-        //}
-
     }
 }

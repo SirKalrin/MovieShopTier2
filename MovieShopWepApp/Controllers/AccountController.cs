@@ -79,7 +79,7 @@ namespace MovieShopWepApp.Controllers
                 if (response.IsSuccessStatusCode)
                 {
                     gateway.Login(model.Email, model.Password);
-                    return RedirectToAction("Login", "Account");
+                    return RedirectToAction("Index", "User");
                 }
                 else
                     ModelState.AddModelError("", response.Content.ReadAsStringAsync().Result);
@@ -87,8 +87,19 @@ namespace MovieShopWepApp.Controllers
 
             return View(model);
         }
+        [AllowAnonymous]
+        public ActionResult Logout(LogoutModel model)
+        {
+            var logout = model.logout();
+            if (logout.Count == 0)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            return RedirectToAction("index", "User");
+
+        }
 
 
-      
+
     }
 }

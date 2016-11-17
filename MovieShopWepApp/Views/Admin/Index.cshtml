@@ -107,18 +107,21 @@
                 <thead></thead>
                 <tbody>
                 <tr class="clickable warning dropdown-deliverable" data-for="#details_1">
-                    @foreach (var order in @Model.Orders)
+                    @if (Model.Orders != null)
                     {
-                        <tr>
-                            <td>@order.Id</td>
-                            <td>@order.Customer.Id</td>
-                            <td style="width: 10px">
-                                <a class="btn btn-primary btn-xs" href="../Orders/Edit/@order.Id"> <span class="glyphicon glyphicon-pencil"></span></a>
-                            </td>
-                            <td style="width: 10px">
-                                <a class="btn btn-danger btn-xs" href="../Orders/Delete/@order.Id"><span class="glyphicon glyphicon-remove"></span></a>
-                            </td>
-                        </tr>
+                        foreach (var order in @Model.Orders)
+                         {
+                             <tr>
+                                 <td>@order.Id</td>
+                                 <td>@order.Customer.Id</td>
+                                 <td style="width: 10px">
+                                     <a class="btn btn-primary btn-xs" href="../Orders/Edit/@order.Id"> <span class="glyphicon glyphicon-pencil"></span></a>
+                                 </td>
+                                 <td style="width: 10px">
+                                     <a class="btn btn-danger btn-xs" href="../Orders/Delete/@order.Id"><span class="glyphicon glyphicon-remove"></span></a>
+                                 </td>
+                             </tr>
+                         }
                     }
                 </tr>
                 </tbody>

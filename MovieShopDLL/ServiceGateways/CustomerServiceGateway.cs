@@ -38,6 +38,7 @@ namespace ServiceGateway.ServiceGateways
         {
             AddAuthorizationHeader();
             HttpResponseMessage response = Client.GetAsync("api/customers/").Result;
+            response.EnsureSuccessStatusCode();
             if (response.IsSuccessStatusCode)
             {
                 return response.Content.ReadAsAsync<List<Customer>>().Result;

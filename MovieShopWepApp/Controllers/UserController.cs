@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Razor;
@@ -88,8 +89,10 @@ namespace MovieShopWepApp.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Checkout([Bind(Include = "Id,FirstName,LastName,Email, Address")] int id, Customer customer)
         {
+            
             if (customer.Id < 1)
             {
                 customer = _customerServiceGateway.Create(customer);
