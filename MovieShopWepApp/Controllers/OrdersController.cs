@@ -47,8 +47,8 @@ namespace MovieShopWepApp.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CustomerId = new SelectList(CusMgr.ReadAll(), "Id", "FirstName", order.Customer.Id);
-            ViewBag.MovieId = new SelectList(MovMgr.ReadAll(), "Id", "Title", order.Movie.Id);
+            ViewBag.Customers = new SelectList(CusMgr.ReadAll(), "Id", "FirstName", order.Customer.Id);
+            ViewBag.Movies = new SelectList(MovMgr.ReadAll(), "Id", "Title", order.Movie.Id);
             ViewBag.Id = new SelectList(MovMgr.ReadAll(), "Id", "Title", order.Id);
             return View(order);
         }

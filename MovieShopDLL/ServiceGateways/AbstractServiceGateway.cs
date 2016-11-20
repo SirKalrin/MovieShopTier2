@@ -28,6 +28,7 @@ namespace ServiceGateway.ServiceGateways
             if (HttpContext.Current.Session["token"] != null)
             {
                 string token = HttpContext.Current.Session["token"].ToString();
+                Client.DefaultRequestHeaders.Remove("Authorization");
                 Client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
             }
         }
